@@ -13,7 +13,7 @@
 
 ## X-Category: Bags & Inventory
 ## X-License: MIT
-## X-Curse-Project-ID: ?
-## X-Wago-ID: ?
+## X-Curse-Project-ID: 1010211
+## X-Wago-ID: rNkPdw6a
 
 BetterBags_ImportExport.lua
