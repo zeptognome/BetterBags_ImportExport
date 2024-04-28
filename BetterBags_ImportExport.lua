@@ -238,15 +238,62 @@ local exportConfigOptions = {
           return exportString
         end,
       },
+      errorsection = {
+        name = L:G("Unknown Items"),
+        type = "header",
+        order = 5,
+        hidden = function() if errorString == "" then return true else return false end end,
+      },
       errors = {
         name = L:G("Items with no name (probably invalid)"),
         type = "input",
         multiline = 3,
         width = "double",
-        order = 5,
+        order = 6,
         hidden = function() if errorString == "" then return true else return false end end,
         get = function()
           return errorString
+        end,
+      },
+      recheck = {
+        type = "execute",
+        name = L:G("Recheck Items"),
+        order = 7,
+        hidden = function() if errorString == "" then return true else return false end end,
+        func = function()
+          exportString = ""
+          errorString = ""
+          if categoryToExport == "" then return end
+          local items = categories:GetMergedCategory(categoryToExport).itemList
+          for itemID in pairs(items) do
+            if C_Item.GetItemInfo(itemID) then
+              exportString = exportString..itemID..","
+              if exportNames then
+                local container = ContinuableContainer:Create()
+                container:AddContinuable(Item:CreateFromItemID(itemID))
+                container:ContinueOnLoad(function() exportString = exportString.." -- "..C_Item.GetItemNameByID(itemID).."\n" end)
+              end
+            else
+              errorString = errorString..itemID..","
+            end
+          end
+      end,
+      },
+      remove = {
+        type = "execute",
+        name = L:G("Remove Items"),
+        order = 8,
+        confirm = true,
+        desc = "Remove these items from all categories?",
+        hidden = function() if errorString == "" then return true else return false end end,
+        func = function()
+          for item in string.gmatch(errorString, "%d+") do
+            local itemID = tonumber(item)
+            if itemID and C_Item.GetItemInfoInstant(itemID) then
+                categories:RemoveItemFromCategory(itemID)
+            end
+          end
+          errorString = ""
         end,
       },
     }
