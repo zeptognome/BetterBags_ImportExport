@@ -132,7 +132,7 @@ local importConfigOptions = {
       },
       import = {
         type = "execute",
-        name = L:G("Import Category"),
+        name = L:G("Import to Category"),
         order = 3,
         disabled = function() if importCategoryName == "" or importItemList == "" then return true else return false end end,
         func = function()
