@@ -73,7 +73,6 @@ local createConfigOptions = {
           categoryToCopy = value
           local categorycolor = string.match(categoryToCopy,"|c%x%x%x%x%x%x%x%x")
           if categorycolor then
-            print(#categorycolor)
             local color = CreateColorFromHexString (string.sub(categorycolor,3,10))
             createCategoryColor.r, createCategoryColor.g, createCategoryColor.b = color:GetRGB()
           end
@@ -182,7 +181,8 @@ local exportConfigOptions = {
           errorString = ""
           categoryToExport = value
           if categoryToExport == "" then return end
-          local items = categories:GetMergedCategory(categoryToExport).importItemList
+          print (categoryToExport)
+          local items = categories:GetMergedCategory(categoryToExport).itemList
           for itemID in pairs(items) do
             if C_Item.GetItemInfo(itemID) then
               exportString = exportString..itemID..","
@@ -211,7 +211,7 @@ local exportConfigOptions = {
           exportString = ""
           errorString = ""
           if categoryToExport == "" then return end
-          local items = categories:GetMergedCategory(categoryToExport).importItemList
+          local items = categories:GetMergedCategory(categoryToExport).itemList
           for itemID in pairs(items) do
             if C_Item.GetItemInfo(itemID) then
               exportString = exportString..itemID..","
