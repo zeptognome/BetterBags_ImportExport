@@ -103,7 +103,7 @@ local importConfigOptions = {
     args = {
       createHelp = {
         type = "description",
-        name = L:G("Import items into a category."),
+        name = L:G("Import items into a category. Non numeric characters are ignored."),
         order = 0,
       },
       item = {
@@ -112,10 +112,8 @@ local importConfigOptions = {
         multiline = true,
         width = "full",
         order = 1,
-        get = function() return importItemList
-       end,
-        set = function(_, value) importItemList
-         = value end,
+        get = function() return importItemList end,
+        set = function(_, value) importItemList = value end,
       },
       category = {
         type = "select",
@@ -123,7 +121,7 @@ local importConfigOptions = {
         name = L:G("Category"),
         desc = L:G("Choose the category to import into"),
         order = 2,
-        values = function () local categoryNameList = {}
+        values = function() local categoryNameList = {}
           local categorylist = categories:GetAllCategories() for _, k in pairs(categorylist) do
             categoryNameList[k.name]= k.name
           end
@@ -136,16 +134,16 @@ local importConfigOptions = {
         type = "execute",
         name = L:G("Import Category"),
         order = 3,
-        disabled = function () if importCategoryName == "" or importItemList
-         == "" then return true else return false end end,
+        disabled = function() if importCategoryName == "" or importItemList == "" then return true else return false end end,
         func = function()
-          for item in string.gmatch(importItemList
-        , "%d+") do
+          for item in string.gmatch(importItemList, "%d+") do
             local itemID = tonumber(item)
             if itemID and C_Item.GetItemInfoInstant(itemID) then
                 categories:AddItemToPersistentCategory(itemID, importCategoryName)
             end
           end
+          importItemList = ""
+          importCategoryName = ""
         end,
       },
     }
