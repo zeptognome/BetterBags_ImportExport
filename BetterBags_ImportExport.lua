@@ -179,7 +179,6 @@ local exportConfigOptions = {
           errorString = ""
           categoryToExport = value
           if categoryToExport == "" then return end
-          print (categoryToExport)
           local items = categories:GetMergedCategory(categoryToExport).itemList
           for itemID in pairs(items) do
             if C_Item.GetItemInfo(itemID) then
