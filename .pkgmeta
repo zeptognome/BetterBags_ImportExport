@@ -1,0 +1,12 @@
+package-as: BetterBags_ImportExport
+
+ignore:
+  - annotations.lua
+  - README.md
+  - .github
+  - .packager
+  - .release
+  - .badges
+
+required-dependencies:
+  - better-bags

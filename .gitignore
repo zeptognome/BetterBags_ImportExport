@@ -1,0 +1,6 @@
+/libs/**
+/includes/**
+# Visual Studio
+.vscode/
+.vs/
+.vsc/
