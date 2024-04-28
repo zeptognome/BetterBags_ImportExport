@@ -5,6 +5,7 @@ Better Bags is a bag replacement addon for World of Warcraft, inspired by AdiBag
 https://github.com/Cidan/BetterBags
 
 BetterBags_ImportExport is a plugin for Better Bags that adds options for importing items to categories, exporting categories, and creating categories with specific colors. 
+![Bb_IE Export](https://github.com/zeptognome/BetterBags_ImportExport/assets/158738380/e45c915e-a614-4eb5-ab0a-af2b04bd7a35)
 
 
 Available via Curseforge: https://www.curseforge.com/wow/addons/betterbags-importexport
