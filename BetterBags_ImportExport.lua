@@ -44,11 +44,29 @@ local createConfigOptions = {
           createCategoryName = value
         end,
       },
+      create = {
+        type = "execute",
+        name = L:G("Create Category"),
+        order = 2,
+        disabled = function () if createCategoryName == "" then return true else return false end end,
+        func = function()
+          if createCategoryName == "" then return end
+          local color = CreateColor(createCategoryColor.r, createCategoryColor.g, createCategoryColor.b)
+          local colorName = WrapTextInColor(createCategoryName,color)
+          categories:CreatePersistentCategory(colorName)
+          createCategoryName = ""
+        end,
+      },
+      colorchoice = {
+        name = L:G("Color"),
+        type = "header",
+        order = 3,
+      },
       color = {
         type = "color",
         name = L:G("Color"),
         desc = "Choose the category color.",
-        order = 3,
+        order = 4,
         get = function()
           return createCategoryColor.r, createCategoryColor.g, createCategoryColor.b
         end,
@@ -61,7 +79,7 @@ local createConfigOptions = {
         style = "dropdown",
         name = L:G("Category to copy"),
         desc = L:G("Choose a category to copy its color"),
-        order = 4,
+        order = 5,
         values = function () local categoryNameList = {}
           local categorylist = categories:GetAllCategories() for _, k in pairs(categorylist) do
             categoryNameList[k.name]= k.name
@@ -77,19 +95,6 @@ local createConfigOptions = {
             createCategoryColor.r, createCategoryColor.g, createCategoryColor.b = color:GetRGB()
           end
       end,
-      },
-      create = {
-        type = "execute",
-        name = L:G("Create Category"),
-        order = 2,
-        disabled = function () if createCategoryName == "" then return true else return false end end,
-        func = function()
-          if createCategoryName == "" then return end
-          local color = CreateColor(createCategoryColor.r, createCategoryColor.g, createCategoryColor.b)
-          local colorName = WrapTextInColor(createCategoryName,color)
-          categories:CreatePersistentCategory(colorName)
-          createCategoryName = ""
-        end,
       },
     }
   }
@@ -239,6 +244,7 @@ local exportConfigOptions = {
         multiline = 3,
         width = "double",
         order = 5,
+        hidden = function() if errorString == "" then return true else return false end end,
         get = function()
           return errorString
         end,
