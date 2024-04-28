@@ -3,8 +3,8 @@
 ## Title: BetterBags_ImportExport
 ## Notes: Adds Import, Export, and Color Categories to BetterBags.
 ## Author: Zeptognome
-## Version: v1.0
-## X-Date: 2024-04-26T06:46:40Z
+## Version: @project-version@
+## X-Date: @project-date-iso@
 ## IconTexture: Interface\Icons\inv_misc_bag_15
 ## X-Website: https://github.com/zeptognome/BetterBags_ImportExport
 
