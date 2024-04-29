@@ -80,9 +80,13 @@ local createConfigOptions = {
         name = L:G("Category to copy"),
         desc = L:G("Choose a category to copy its color"),
         order = 5,
+        disabled = false,
         values = function () local categoryNameList = {}
-          local categorylist = categories:GetAllCategories() for _, k in pairs(categorylist) do
-            categoryNameList[k.name]= k.name
+          local categorylist = categories:GetAllCategories()
+          for _, k in pairs(categorylist) do
+            if (string.match(k.name,"|c%x%x%x%x%x%x%x%x")) then
+              categoryNameList[k.name]= k.name
+            end
           end
           return categoryNameList
         end,
@@ -305,5 +309,5 @@ if (config.AddPluginConfig) then
   config:AddPluginConfig("Import", importConfigOptions)
   config:AddPluginConfig("Export", exportConfigOptions)
 else
-  print ("BetterBags_ImportExport NOT loaded. Betterbags Plugin API Incompatible")
+  print ("BetterBags_ImportExport NOT loaded. Betterbags Plugin API Incompatible. Update to BetterBags v0.1.27-5 alpha or newer")
 end
