@@ -293,7 +293,7 @@ local exportConfigOptions = {
         func = function()
           for item in string.gmatch(errorString, "%d+") do
             local itemID = tonumber(item)
-            if itemID and C_Item.GetItemInfoInstant(itemID) then
+            if itemID then
                 categories:RemoveItemFromCategory(itemID)
             end
           end

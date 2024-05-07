@@ -1,4 +1,4 @@
-## Interface: 100206, 40400, 100207, 110000, 11502
+## Interface: 11502, 40400, 100207, 110000
 
 ## Title: BetterBags_ImportExport
 ## Notes: Adds Import, Export, and Color Categories to BetterBags.
