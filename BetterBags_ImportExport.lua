@@ -7,7 +7,7 @@ local categories = addon:GetModule('Categories')
 ---@class Localization: AceModule
 local L = addon:GetModule('Localization')
 
----@class Categories: AceModule
+---@class Config: AceModule
 local config = addon:GetModule('Config')
 
 local createCategoryColor = {r = 1, g = 1, b = 1}
@@ -53,7 +53,9 @@ local createConfigOptions = {
           if createCategoryName == "" then return end
           local color = CreateColor(createCategoryColor.r, createCategoryColor.g, createCategoryColor.b)
           local colorName = WrapTextInColor(createCategoryName,color)
-          categories:CreatePersistentCategory(colorName)
+          ---@type CustomCategoryFilter
+          local newcat = { name = colorName,itemList = {}, save = true}
+          categories:CreateCategory(newcat)
           createCategoryName = ""
         end,
       },
@@ -148,7 +150,7 @@ local importConfigOptions = {
           for item in string.gmatch(importItemList, "%d+") do
             local itemID = tonumber(item)
             if itemID and C_Item.GetItemInfoInstant(itemID) then
-                categories:AddItemToPersistentCategory(itemID, importCategoryName)
+                categories:AddPermanentItemToCategory(itemID, importCategoryName)
             end
           end
           importItemList = ""
